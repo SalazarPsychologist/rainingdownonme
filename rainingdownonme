@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inner Strength</title>
+
+<!-- FAVICON -->
+<link rel="icon" type="image/png" href="image1.png">
+
+<link href="https://fonts.googleapis.com" rel="stylesheet">
+<style>
+  :root {
+    --bg: #121212; --card: #1e1e1e; --text: #ffffff; --accent: #ffce44; --border: #333;
+  }
+
+  body { 
+    background: var(--bg); color: var(--text); font-family: 'Varela Round', sans-serif; 
+    margin: 0; padding: 0; min-height: 100vh; overflow-x: hidden;
+  }
+
+  /* FRONT PAGE / START OVERLAY */
+  #start-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #121212; z-index: 9999; display: flex;
+    flex-direction: column; justify-content: center; align-items: center;
+    color: white; text-align: center; padding: 20px;
+  }
+  
+  #start-overlay h1 { 
+    font-family: 'Fredoka One', cursive; font-size: clamp(2.5rem, 8vw, 4rem); 
+    color: var(--accent); margin: 0 0 20px 0; text-shadow: 4px 4px 0px #000;
+  }
+
+  .front-statement {
+    max-width: 650px; background: var(--card); padding: 30px; border-radius: 25px;
+    border: 4px solid var(--accent); line-height: 1.6; font-size: 1.1rem;
+    box-shadow: 8px 8px 0px white; margin-bottom: 30px;
+  }
+
+  .start-btn {
+    padding: 20px 50px; font-size: 1.5rem; background: var(--accent);
+    color: #000; border: 4px solid #000; border-radius: 50px;
+    font-family: 'Fredoka One', cursive; cursor: pointer;
+    box-shadow: 6px 6px 0px white; transition: 0.3s;
+  }
+  .start-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
+
+.enlarge-btn {
+  text-decoration: none;
+}
+
+  /* GALLERY CONTENT */
+  #main-content { display: flex; flex-direction: column; align-items: center; padding: 20px; }
+
+  header h1 { font-family: 'Fredoka One', cursive; font-size: clamp(2rem, 6vw, 3rem); color: var(--accent); text-shadow: 3px 3px 0px #000; margin-top: 20px; }
+
+  /* AUDIO WRAPPERS */
+  .audio-wrapper {
+    width: 100%; max-width: 760px; margin: 20px auto 40px auto;
+    background: var(--card); border: 4px solid var(--accent);
+    border-radius: 20px; overflow: hidden; box-shadow: 8px 8px 0px var(--text);
+  }
+  .audio-wrapper iframe { display: block; border: none; width: 100%; }
+
+  .grid-container {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px; width: 100%; max-width: 1200px; margin-top: 20px;
+  }
+
+  .photo-tile {
+    background: var(--card); border-radius: 25px; border: 5px solid var(--text);
+    overflow: hidden; cursor: pointer; position: relative;
+    box-shadow: 8px 8px 0px rgba(0,0,0,0.3); transition: transform 0.3s ease;
+  }
+  .photo-tile:hover { transform: translateY(-8px); border-color: var(--accent); }
+  .photo-tile img { width: 100%; height: 500px; object-fit: cover; display: block; }
+
+  /* SHARED STYLE FOR ENLARGE AND BACK BUTTONS */
+  .btn-clear {
+    background: transparent; 
+    color: #ffffff;           
+    border: 2px solid #ffffff; 
+    border-radius: 20px;
+    font-family: 'Fredoka One', cursive; 
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+  }
+
+  .btn-clear:hover {
+    background: rgba(255, 255, 255, 0.2); 
+    transform: scale(1.05);
+  }
+
+  /* Specific sizing for the Enlarge button inside tiles */
+  .enlarge-btn {
+    position: absolute; top: 15px; right: 15px; 
+    padding: 8px 15px; font-size: 0.8rem; z-index: 10;
+  }
+
+  /* Specific sizing for the Back button at the bottom */
+  .back-btn {
+    padding: 12px 30px; font-size: 1rem; margin-top: 40px; margin-bottom: 80px;
+  }
+
+  .tile-info { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; text-align: center; }
+  .photo-tile.active .tile-info { max-height: 300px; padding: 25px; border-top: 3px dashed var(--border); }
+
+  /* LIGHTBOX MODAL */
+  #lightbox {
+    display: none; position: fixed; z-index: 10000; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); justify-content: center; align-items: center; cursor: zoom-out;
+  }
+  #lightbox img { max-width: 90%; max-height: 90%; border: 4px solid white; border-radius: 10px; }
+</style>
+</head>
+<body>
+
+
+<!-- MAIN GALLERY -->
+<div id="main-content">
+    <header><h1>Inner Strength</h1></header>
+
+    <!-- SINGLE SONG EMBED -->
+    <div class="audio-wrapper">
+      <iframe src="https://suno.com/embed/90431bf6-eb3b-4db6-81a9-278dbfb3ae7f" width="760" height="240" frameborder="0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"><a href="https://suno.com/song/90431bf6-eb3b-4db6-81a9-278dbfb3ae7f">Listen on Suno</a></iframe>
+    </div>
+    <div class="grid-container">
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=1"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image1.png" alt="Part 1">
+        <div class="tile-info"><h3>The Quiet Guard</h3><p>Finding balance in silence.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=2"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image2.png" alt="Part 2">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=3"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image3.png" alt="Part 3">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=4"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image4.png" alt="Part 4">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=5"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image5.png" alt="Part 5">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=6"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image6.png" alt="Part 6">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=7"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image7.png" alt="Part 7">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=8"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image8.png" alt="Part 8">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=9"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image9.png" alt="Part 9">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=10"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image10.png" alt="Part 10">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=11"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image11.png" alt="Part 11">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=12"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image12.png" alt="Part 12">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=13"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image13.png" alt="Part 13">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=14"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image14.png" alt="Part 14">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=15"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image15.png" alt="Part 15">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=16"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image16.png" alt="Part 16">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=17"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image17.png" alt="Part 17">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=18"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image18.png" alt="Part 18">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=19"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image19.png" alt="Part 19">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=20"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+   🔍 ENLARGE
+</a>
+<img src="image20.png" alt="Part 20">
+        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+    </div>
+
+    <!-- SEE FULL PLAYLIST -->
+    <p style="margin-top: 60px;">
+         <a href="https://suno.com/playlist/4b7d9f88-ca5d-4588-8df1-a8eb36d80355" target="_blank" style="color:var(--accent); text-decoration:none; font-family:'Fredoka One'; font-size: 1.2rem; border: 2px solid var(--accent); padding: 15px 30px; border-radius: 30px;">
+            SEE FULL PLAYLIST 🎵
+        </a>
+    </p>
+
+    <!-- BACK BUTTON -->
+    <button class="btn-clear back-btn" onclick="goBack()">⬅ BACK </button>
+</div>
+
+<!-- LIGHTBOX MODAL -->
+<div id="lightbox" onclick="this.style.display='none'">
+  <img id="lightbox-img" src="">
+</div>
+
+<script>
+
+  function openLightbox(src, event) {
+    event.stopPropagation(); // Stops tile from opening/closing
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+</script>
+
+</body>
+</html>
