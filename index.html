@@ -3,128 +3,248 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inner Strength</title>
+<title>Raining Down On Me</title>
 
 <!-- FAVICON -->
 <link rel="icon" type="image/png" href="image1.png">
 
 <link href="https://fonts.googleapis.com" rel="stylesheet">
-<style>
-  :root {
-    --bg: #121212; --card: #1e1e1e; --text: #ffffff; --accent: #ffce44; --border: #333;
-  }
+ <style>
+        :root {
+            --bg: #121212;
+            --card: #1e1e1e;
+            --text: #ffffff;
+            /* Updated accent color to a glowing metallic gold base */
+            --accent: #ffd700; 
+            --border: #333;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Varela Round', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* REUSABLE ANIMATED NEON TEXT STYLE */
+        .neon-gold-streaks {
+            background: linear-gradient(
+                120deg, 
+                #ffd700 0%, 
+                #ffb700 20%, 
+                #b76e79 40%, /* Rose Gold Streak */
+                #ff66cc 50%, /* Pink Neon Streak */
+                #b76e79 60%, /* Rose Gold Streak */
+                #ffd700 80%, 
+                #ffd700 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: swirlStreaks 4s linear infinite;
+            filter: drop-shadow(0 0 2px rgba(255,215,0,0.6));
+        }
 
-  body { 
-    background: var(--bg); color: var(--text); font-family: 'Varela Round', sans-serif; 
-    margin: 0; padding: 0; min-height: 100vh; overflow-x: hidden;
-  }
+        /* TEXT ANIMATION FOR SWIRLS/STREAKS */
+        @keyframes swirlStreaks {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
 
-  /* FRONT PAGE / START OVERLAY */
-  #start-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: #121212; z-index: 9999; display: flex;
-    flex-direction: column; justify-content: center; align-items: center;
-    color: white; text-align: center; padding: 20px;
-  }
-  
-  #start-overlay h1 { 
-    font-family: 'Fredoka One', cursive; font-size: clamp(2.5rem, 8vw, 4rem); 
-    color: var(--accent); margin: 0 0 20px 0; text-shadow: 4px 4px 0px #000;
-  }
-
-  .front-statement {
-    max-width: 650px; background: var(--card); padding: 30px; border-radius: 25px;
-    border: 4px solid var(--accent); line-height: 1.6; font-size: 1.1rem;
-    box-shadow: 8px 8px 0px white; margin-bottom: 30px;
-  }
-
-  .start-btn {
-    padding: 20px 50px; font-size: 1.5rem; background: var(--accent);
-    color: #000; border: 4px solid #000; border-radius: 50px;
-    font-family: 'Fredoka One', cursive; cursor: pointer;
-    box-shadow: 6px 6px 0px white; transition: 0.3s;
-  }
-  .start-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
-
-.enlarge-btn {
-  text-decoration: none;
-}
-
-  /* GALLERY CONTENT */
-  #main-content { display: flex; flex-direction: column; align-items: center; padding: 20px; }
-
-  header h1 { font-family: 'Fredoka One', cursive; font-size: clamp(2rem, 6vw, 3rem); color: var(--accent); text-shadow: 3px 3px 0px #000; margin-top: 20px; }
-
-  /* AUDIO WRAPPERS */
-  .audio-wrapper {
-    width: 100%; max-width: 760px; margin: 20px auto 40px auto;
-    background: var(--card); border: 4px solid var(--accent);
-    border-radius: 20px; overflow: hidden; box-shadow: 8px 8px 0px var(--text);
-  }
-  .audio-wrapper iframe { display: block; border: none; width: 100%; }
-
-  .grid-container {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px; width: 100%; max-width: 1200px; margin-top: 20px;
-  }
-
-  .photo-tile {
-    background: var(--card); border-radius: 25px; border: 5px solid var(--text);
-    overflow: hidden; cursor: pointer; position: relative;
-    box-shadow: 8px 8px 0px rgba(0,0,0,0.3); transition: transform 0.3s ease;
-  }
-  .photo-tile:hover { transform: translateY(-8px); border-color: var(--accent); }
-  .photo-tile img { width: 100%; height: 500px; object-fit: cover; display: block; }
-
-  /* SHARED STYLE FOR ENLARGE AND BACK BUTTONS */
-  .btn-clear {
-    background: transparent; 
-    color: #ffffff;           
-    border: 2px solid #ffffff; 
-    border-radius: 20px;
-    font-family: 'Fredoka One', cursive; 
-    cursor: pointer;
-    transition: 0.3s;
-    text-transform: uppercase;
-  }
-
-  .btn-clear:hover {
-    background: rgba(255, 255, 255, 0.2); 
-    transform: scale(1.05);
-  }
-
-  /* Specific sizing for the Enlarge button inside tiles */
-  .enlarge-btn {
-    position: absolute; top: 15px; right: 15px; 
-    padding: 8px 15px; font-size: 0.8rem; z-index: 10;
-  }
-
-  /* Specific sizing for the Back button at the bottom */
-  .back-btn {
-    padding: 12px 30px; font-size: 1rem; margin-top: 40px; margin-bottom: 80px;
-  }
-
-  .tile-info { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; text-align: center; }
-  .photo-tile.active .tile-info { max-height: 300px; padding: 25px; border-top: 3px dashed var(--border); }
-
-  /* LIGHTBOX MODAL */
-  #lightbox {
-    display: none; position: fixed; z-index: 10000; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); justify-content: center; align-items: center; cursor: zoom-out;
-  }
-  #lightbox img { max-width: 90%; max-height: 90%; border: 4px solid white; border-radius: 10px; }
-</style>
+        /* FRONT PAGE / START OVERLAY */
+        #start-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #121212;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        #start-overlay h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin: 0 0 20px 0;
+            /* Multi-layered neon glow text shadow */
+            text-shadow: 
+                0 0 5px rgba(255, 215, 0, 0.5),
+                0 0 15px rgba(183, 110, 121, 0.6),
+                0 0 30px rgba(255, 102, 204, 0.4);
+        }
+        .front-statement {
+            max-width: 650px;
+            background: var(--card);
+            padding: 30px;
+            border-radius: 25px;
+            border: 4px solid var(--accent);
+            line-height: 1.6;
+            font-size: 1.1rem;
+            box-shadow: 8px 8px 0px white;
+            margin-bottom: 30px;
+        }
+        .start-btn {
+            padding: 20px 50px;
+            font-size: 1.5rem;
+            background: var(--accent);
+            color: #000;
+            border: 4px solid #000;
+            border-radius: 50px;
+            font-family: 'Fredoka One', cursive;
+            cursor: pointer;
+            box-shadow: 6px 6px 0px white;
+            transition: 0.3s;
+        }
+        .start-btn:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+        .enlarge-btn {
+            text-decoration: none;
+        }
+        /* GALLERY CONTENT */
+        #main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        header h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: clamp(2rem, 6vw, 3rem);
+            margin-top: 20px;
+            /* Match the glowing header text shadow */
+            text-shadow: 
+                0 0 5px rgba(255, 215, 0, 0.5),
+                0 0 15px rgba(183, 110, 121, 0.6),
+                0 0 30px rgba(255, 102, 204, 0.4);
+        }
+        /* AUDIO WRAPPERS */
+        .audio-wrapper {
+            width: 100%;
+            max-width: 760px;
+            margin: 20px auto 40px auto;
+            background: var(--card);
+            border: 4px solid var(--accent);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 8px 8px 0px var(--text);
+        }
+        .audio-wrapper iframe {
+            display: block;
+            border: none;
+            width: 100%;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 20px;
+        }
+        .photo-tile {
+            background: var(--card);
+            border-radius: 25px;
+            border: 5px solid var(--text);
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+        .photo-tile:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+        }
+        .photo-tile img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+        }
+        /* SHARED STYLE FOR ENLARGE AND BACK BUTTONS */
+        .btn-clear {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            border-radius: 20px;
+            font-family: 'Fredoka One', cursive;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+        .btn-clear:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        /* Specific sizing for the Enlarge button inside tiles */
+        .enlarge-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 8px 15px;
+            font-size: 0.8rem;
+            z-index: 10;
+        }
+        /* Specific sizing for the Back button at the bottom */
+        .back-btn {
+            padding: 12px 30px;
+            font-size: 1rem;
+            margin-top: 40px;
+            margin-bottom: 80px;
+        }
+        .tile-info {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            text-align: center;
+        }
+        .photo-tile.active .tile-info {
+            max-height: 300px;
+            padding: 25px;
+            border-top: 3px dashed var(--border);
+        }
+        /* LIGHTBOX MODAL */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+        #lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border: 4px solid white;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
 
 
 <!-- MAIN GALLERY -->
 <div id="main-content">
-    <header><h1>Inner Strength</h1></header>
+    <header><h1 class="neon-gold-streaks">Raining Down On Me</h1></header>
 
     <!-- SINGLE SONG EMBED -->
     <div class="audio-wrapper">
-      <iframe src="https://suno.com/embed/90431bf6-eb3b-4db6-81a9-278dbfb3ae7f" width="760" height="240" frameborder="0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"><a href="https://suno.com/song/90431bf6-eb3b-4db6-81a9-278dbfb3ae7f">Listen on Suno</a></iframe>
+      <iframe src="https://suno.com/embed/a7222d21-fd9d-4103-87c4-245fdf83e669" width="760" height="240" frameborder="0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"><a href="https://suno.com/song/90431bf6-eb3b-4db6-81a9-278dbfb3ae7f">Listen on Suno</a></iframe>
     </div>
     <div class="grid-container">
 
@@ -132,7 +252,7 @@
 <a href="artwork.html?id=1"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image1.png" alt="Part 1">
         <div class="tile-info"><h3>The Quiet Guard</h3><p>Finding balance in silence.</p></div>
@@ -142,190 +262,261 @@
 <a href="artwork.html?id=2"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image2.png" alt="Part 2">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>Lips Like Rose Petals</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=3"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image3.png" alt="Part 3">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>Empty Hands</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=4"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image4.png" alt="Part 4">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>Can You Have My All?</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=5"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image5.png" alt="Part 5">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>Magnificent</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=6"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image6.png" alt="Part 6">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>Absolutely Gorgeous</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=7"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image7.png" alt="Part 7">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>Bad Bad Love</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=8"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image8.png" alt="Part 8">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>My Relief</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=9"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image9.png" alt="Part 9">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>Take Me Back</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=10"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image10.png" alt="Part 10">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>Married to the Night</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=11"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image11.png" alt="Part 11">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>Guilt On This Old Guitar</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=12"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image12.png" alt="Part 12">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>I'd Walk With You For Miles and Miles</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=13"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image13.png" alt="Part 13">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>Onset Beach</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=14"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image14.png" alt="Part 14">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>Please Don't Forget Me</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=15"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image15.png" alt="Part 15">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>Gypsy Soul</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=16"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image16.png" alt="Part 16">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>Armor In The Ink</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=17"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image17.png" alt="Part 17">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>Double Fist Two Step</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=18"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image18.png" alt="Part 18">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>Ghettoizing and Fantasizing</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=19"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image19.png" alt="Part 19">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>Vroom Vroom Anthem</h3><p>DESCRIPTION.</p></div>
       </div>
 
 <div class="photo-tile" onclick="this.classList.toggle('active')">
 <a href="artwork.html?id=20"
    class="btn-clear enlarge-btn"
    onclick="event.stopPropagation();">
-   🔍 ENLARGE
+         🎵 🎧 🎵     
 </a>
 <img src="image20.png" alt="Part 20">
-        <div class="tile-info"><h3>TITLE</h3><p>DESCRIPTION.</p></div>
+        <div class="tile-info"><h3>Siren in the Undertow</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=21"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+         🎵 🎧 🎵     
+</a>
+<img src="image21.png" alt="Part 21">
+        <div class="tile-info"><h3>Isaiah Mysaiah</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=22"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+         🎵 🎧 🎵     
+</a>
+<img src="image22.png" alt="Part 22">
+        <div class="tile-info"><h3>Breath Life Again</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=23"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+         🎵 🎧 🎵     
+</a>
+<img src="image23.png" alt="Part 23">
+        <div class="tile-info"><h3>Can I Make Your Heart Right</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=24"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+         🎵 🎧 🎵     
+</a>
+<img src="image24.png" alt="Part 24">
+        <div class="tile-info"><h3>Your Love Heals</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=25"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+         🎵 🎧 🎵     
+</a>
+<img src="image25.png" alt="Part 25">
+        <div class="tile-info"><h3>Inner Peace</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=26"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+         🎵 🎧 🎵     
+</a>
+<img src="image26.png" alt="Part 26">
+        <div class="tile-info"><h3>Beneath the Surface</h3><p>DESCRIPTION.</p></div>
+      </div>
+
+<div class="photo-tile" onclick="this.classList.toggle('active')">
+<a href="artwork.html?id=27"
+   class="btn-clear enlarge-btn"
+   onclick="event.stopPropagation();">
+         🎵 🎧 🎵     
+</a>
+<img src="image27.png" alt="Part 27">
+        <div class="tile-info"><h3>Unbreakable</h3><p>DESCRIPTION.</p></div>
       </div>
 
     </div>
