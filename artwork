@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Artwork</title>
+
+<link href="https://fonts.googleapis.com" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#121212;
+  --card:#1e1e1e;
+  --text:#ffffff;
+  --accent:#ffce44;
+  --border:#333;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Varela Round',sans-serif;
+  margin:0;
+  padding:30px;
+  text-align:center;
+}
+
+h1{
+  color:var(--accent);
+  font-family:'Fredoka One',cursive;
+}
+
+.artwork-image{
+  width:100%;
+  max-width:1000px;
+  display:block;
+  margin:30px auto;
+  border:4px solid white;
+  border-radius:20px;
+}
+
+.audio-wrapper{
+  width:100%;
+  max-width:760px;
+  margin:30px auto;
+  background:var(--card);
+  border:4px solid var(--accent);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:8px 8px 0px white;
+}
+
+.audio-wrapper iframe{
+  width:100%;
+  border:none;
+  display:block;
+}
+
+.back-btn{
+  display:inline-block;
+  margin-top:30px;
+  padding:15px 30px;
+  border:2px solid white;
+  border-radius:25px;
+  color:white;
+  text-decoration:none;
+  font-family:'Fredoka One',cursive;
+}
+
+.back-btn:hover{
+  background:rgba(255,255,255,.15);
+}
+</style>
+
+</head>
+
+<body>
+
+<h1 id="title">Artwork</h1>
+
+<img id="artImage" class="artwork-image" src="">
+
+<div class="audio-wrapper">
+  <iframe id="songFrame"
+          width="760"
+          height="240"
+          frameborder="0"
+          allow="autoplay; encrypted-media; fullscreen"
+          allowfullscreen>
+  </iframe>
+</div>
+
+<p id="description"></p>
+
+<a href="javascript:history.back()" class="back-btn">
+⬅ BACK TO GALLERY
+</a>
+
+<script>
+
+const artworkData = {
+
+1: {
+title: "The Quiet Guard",
+image: "image1.png",
+description: "Finding balance in silence.",
+song: "https://suno.com/embed/90431bf6-eb3b-4db6-81a9-278dbfb3ae7f"
+},
+
+2: {
+title: "Moonlight Chorus",
+image: "image2.png",
+description: "Unity and finding your inner truth.",
+song: "https://suno.com/embed/PUT-SONG-ID-HERE"
+},
+
+3: {
+title: "Armour In The Ink",
+image: "image3.png",
+description: "Resilience becoming visible light.",
+song: "https://suno.com/embed/42eb3bdf-23fb-4c12-b895-40724b42f467"
+},
+
+4: {
+title: "????",
+image: "image4.png",
+description: "Description.",
+song: "https://suno.com/embed/PUT-SONG-ID-HERE"
+},
+
+5: {
+title: "????",
+image: "image5.png",
+description: "Description.",
+song: "https://suno.com/embed/PUT-SONG-ID-HERE"
+},
+
+6: {
+title: "Siren in the Undertow",
+image: "image6.png",
+description: "Description.",
+song: "https://suno.com/embed/de9f862f-6f30-40d3-83f2-94ef57c513d2"
+},
+
+7: {
+title: "Empty Hands DUPLICATE",
+image: "image7.png",
+description: "Description.",
+song: "https://suno.com/embed/aa0f644-b18b-4916-8061-3832d17fe8ea"
+},
+
+8: {
+title: "Empty Hands",
+image: "image8.png",
+description: "Description.",
+song: "https://suno.com/embed/aa0f644-b18b-4916-8061-3832d17fe8ea"
+},
+
+9: {
+title: "?????",
+image: "image9.png",
+description: "Description.",
+song: "https://suno.com/embed/933ba75f-ce2c-4e40-b0a9-127a6bfdae75"
+},
+
+10: {
+title: "Please Don't Forget Me",
+image: "image10.png",
+description: "Description.",
+song: "https://suno.com/embed/933ba75f-ce2c-4e40-b0a9-127a6bfdae75"
+},
+
+11: {
+title: "Vroom Vroom Anthem",
+image: "image11.png",
+description: "Description.",
+song: "https://suno.com/embed/999e32e1-174d-40cf-9b5a-01e303d33164"
+},
+
+12: {
+title: "Raining Down On Me",
+image: "image12.png",
+description: "Description.",
+song: "https://suno.com/embed/a7222d21-fd9d-4103-87c4-245fdf83e669"
+},
+
+13: {
+title: "Ghettoizing and Fantasizing",
+image: "image13.png",
+description: "Description.",
+song: "https://suno.com/embed/0ac14bb9-b6ab-4f78-8c73-3b86b195b06e"
+},
+
+14: {
+title: "Absolutely Gorgeous",
+image: "image14.png",
+description: "Description.",
+song: "https://suno.com/embed/8ef498c1-a0ce-4d62-90e2-c65417bb47a1"
+},
+
+15: {
+title: "Bad Bad Love",
+image: "image15.png",
+description: "Description.",
+song: "https://suno.com/embed/5a553028-8723-47d4-bb99-bbc26ecf830d"
+},
+
+16: {
+title: "I'd Walk With You For Miles and Miles",
+image: "image16.png",
+description: "Description.",
+song: "https://suno.com/embed/904d0c88-4eb7-4d5f-8102-efe2d54ebad9"
+},
+
+17: {
+title: "Magnificent",
+image: "image17.png",
+description: "Description.",
+song: "https://suno.com/embed/57898bae-9434-44b2-aa1e-31beadfb5c4f"
+},
+
+18: {
+title: "My Relief",
+image: "image18.png",
+description: "My Relief.",
+song: "https://suno.com/embed/f82e3c23-bda0-4ff0-83ac-048615c9d458"
+},
+
+19: {
+title: "Can I Make Your Heart Right",
+image: "image19.png",
+description: "Description.",
+song: "https://suno.com/embed/afed311c-7142-4c00-940e-2c5cc7c5be39"
+},
+
+20: {
+title: "Isaiah Mysiah",
+image: "image20.png",
+description: "Description.",
+song: "https://suno.com/embed/5d1e4d90-5572-48cd-bd63-700091ce4ef3"
+}
+
+};
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get('id');
+
+if (artworkData[id]) {
+
+document.title = artworkData[id].title;
+
+document.getElementById("title").innerText =
+artworkData[id].title;
+
+document.getElementById("artImage").src =
+artworkData[id].image;
+
+document.getElementById("description").innerText =
+artworkData[id].description;
+
+document.getElementById("songFrame").src =
+artworkData[id].song;
+
+}
+
+</script>
+
+</body>
+</html>
