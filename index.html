@@ -214,7 +214,8 @@ overflow-x: hidden;
       visibility: hidden !important;
     }
     
-    .dream-content { text-align: center; width:100%;
+    .dream-content { position:relative;
+z-index:10; text-align: center; width:100%;
     max-width:1200px;
     padding:30px 15px;
     margin:auto; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box; }
@@ -239,12 +240,29 @@ overflow-x: hidden;
     .word1 { top: 8%; left: 10%; } .word2 { top: 20%; right: 8%; } .word3 { top: 42%; left: 6%; } .word4 { top: 65%; left: 15%; } .word5 { top: 12%; left: 50%; } .word6 { top: 78%; right: 10%; } .word7 { top: 55%; right: 15%; } .word8 { top: 32%; left: 70%; } .word9 { bottom: 12%; left: 45%; } .word10 { top: 5%; right: 35%; }
     @keyframes drift { 0% { transform: translateY(0px); opacity: .45; } 50% { transform: translateY(-15px); opacity: .45; } 100% { transform: translateY(0px); opacity: .45; } }
      
-    .dream-glow { position: absolute; inset: -50%; background: radial-gradient(circle, rgba(255,215,0,.06), transparent 60%); animation: rotateGlow 60s linear infinite; }
+    .dream-glow {
+    position: absolute;
+    inset: -50%;
+    background: radial-gradient(circle, rgba(255,215,0,.06), transparent 60%);
+    animation: rotateGlow 60s linear infinite;
+
+    pointer-events:none;
+    z-index:0;
+}
     @keyframes rotateGlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     
- .arrow-portal-btn {
-  position: absolute;
-  top: 30px;                /* Distance from the top edge of the screen */
+ .arrow-portal-btn{
+
+    position:sticky;
+
+    top:15px;
+
+    margin-left:auto;
+    margin-right:0;
+
+    align-self:flex-end;
+
+    z-index:9999;
   bottom: auto;             /* Disables your old bottom property */
   left: auto;               /* Disables your old left center property */
   right: 40px;              /* Distance from the right edge of the screen */
@@ -330,7 +348,7 @@ overflow-x: hidden;
     max-width:1100px;
     margin:60px auto;
     padding:40px 20px;
-    min-height:500px;
+    min-height:280px;
 }
 
 .floating-word{
@@ -388,7 +406,7 @@ overflow-x: hidden;
 }
 
 .floating-word:nth-child(10){
-    top:520px;
+    top:220px;
     right:20%;
 }
 
@@ -438,16 +456,9 @@ overflow-x: hidden;
 
     <!-- TRAILER -->
     <div class="audio-wrapper trailer-player">
-
-        <iframe
-            src=https://suno.com/embed/92895633-106a-4645-a706-4feda8b90ec3
-            width="760"
-            height="240"
-            frameborder="0"
-            allowfullscreen>
-        </iframe>
-
+      <iframe src="https://suno.com/embed/92895633-106a-4645-a706-4feda8b90ec3" width="760" height="240" frameborder="0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"><a href="https://suno.com/embed/92895633-106a-4645-a706-4feda8b90ec3">Listen on Suno</a></iframe>
     </div>
+      
 
     <!-- TAGLINE -->
     <div class="album-description">
