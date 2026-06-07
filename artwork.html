@@ -485,7 +485,7 @@ heartBtn.addEventListener("click", () => {
         );
 
         heartBtn.innerText =
-        "❤️";
+        "🤍";
 
         hasLiked = true;
 
@@ -507,7 +507,7 @@ heartBtn.addEventListener("click", () => {
         );
 
         heartBtn.innerText =
-        "🖤";
+        "🤍";
 
         hasLiked = false;
 
@@ -524,7 +524,7 @@ function createHeartExplosion() {
         ".like-section"
     );
 
-    const heartCount = 40;
+    const heartCount = 50;
 
     for(let i=0;i<heartCount;i++) {
 
@@ -544,7 +544,7 @@ function createHeartExplosion() {
         + (Math.random() * .4 - .2);
 
         const burstDistance =
-        260 + Math.random() * 40;
+        200 + Math.random() * 40;
 
         const xBurst =
         Math.cos(angle)
