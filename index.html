@@ -16,7 +16,8 @@
       --border: #333;
     }
     body {
-      background: var(--bg);
+      text-align: center;
+	background: var(--bg);
       color: var(--text);
       font-family: 'Varela Round', sans-serif;
       margin: 0;
@@ -52,8 +53,8 @@
       box-sizing: border-box;
       gap: 20px;
     }
-    .top-row { margin-top: 10px; margin-bottom: 20px; }
-    .bottom-row { margin-top: 60px; margin-bottom: 60px; }
+    .top-row { margin-top: 50px; margin-bottom: 50px; }
+    .bottom-row { margin-top: 70px; margin-bottom: 70px; }
 
     #main-content {
       display: flex;
@@ -61,7 +62,7 @@
       align-items: center;
       padding: 20px;
     }
-    .gallery-controls-row header { flex-grow: 1; text-align: center; }
+    .gallery-controls-row header { flex-grow: 0; text-align: center; }
     header h1 {
 	text-align:center;
       font-family: 'Fredoka One', cursive;
@@ -71,7 +72,7 @@
     }
     .audio-wrapper {
             width: 100%;
-            max-width: 760px;
+            max-width: 600px;
             margin: 20px auto 40px auto;
             background: var(--card);
             border: 4px solid var(--accent);
@@ -118,15 +119,17 @@
     .back-btn { padding: 12px 30px; font-size: 1rem; margin: 0; }
     
     .playlist-btn {
-      color: var(--accent);
-      text-decoration: none;
-      font-family: 'Fredoka One';
-      border: 2px solid var(--accent);
-      padding: 12px 30px;
-      border-radius: 30px;
-      transition: .3s;
+      background: transparent;
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      border-radius: 20px;
+      font-family: 'Fredoka One', cursive;
+      cursor: pointer;
+      transition: 0.3s;
+      text-transform: uppercase;
       white-space: nowrap;
     }
+.playlist-btn { padding: 12px 30px; font-size: 1rem; margin: 0; }
     .playlist-btn:hover { transform: scale(1.05); }
     .tile-info { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; text-align: center; }
     .photo-tile.active .tile-info { max-height: 300px; padding: 25px; border-top: 3px dashed var(--border); }
@@ -172,13 +175,61 @@
   text-shadow: 0 0 10px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.9); /* High contrast shadow fallback */}
     .word1 { top: 8%; left: 10%; } .word2 { top: 20%; right: 8%; } .word3 { top: 42%; left: 6%; } .word4 { top: 65%; left: 15%; } .word5 { top: 12%; left: 50%; } .word6 { top: 78%; right: 10%; } .word7 { top: 55%; right: 15%; } .word8 { top: 32%; left: 70%; } .word9 { bottom: 12%; left: 45%; } .word10 { top: 5%; right: 35%; }
     @keyframes drift { 0% { transform: translateY(0px); opacity: .45; } 50% { transform: translateY(-15px); opacity: .45; } 100% { transform: translateY(0px); opacity: .45; } }
-    #portal-button { position: absolute; top: auto; bottom: 470px; left: 40%; right: auto; width: 250px; height: 250px; border-radius: 50%; cursor: pointer; background: radial-gradient(circle, #ffd700, #b76e79); box-shadow: 0 0 40px rgba(183,110,121,.5); display: flex; justify-content: center; align-items: center; z-index: 10; }
-    .medallion-inner { width: 140px; height: 140px; border-radius: 50%; border: 3px solid rgba(255,255,255,.4); display: flex; justify-content: center; align-items: center; font-family: 'Fredoka One'; color: white; letter-spacing: 4px; font-size: 1.2rem; }
-    .portal-text { color: white; letter-spacing: 2px; text-transform: uppercase; }
+    <div class="dream-content">
+      <div class="dream-title neon-gold-streaks"> Raining Down On Me </div>
+      <img src="image1.png" class="dream-image">
+      
+      <!-- REPLACE PORTAL BUTTON WRAPPER WITH THIS COMPACT ARROW BUTTON -->
+      <button id="portal-button" class="arrow-portal-btn" aria-label="Enter Gallery">
+        <span class="arrow-icon">→</span>
+      </button>
+    </div>
     .dream-glow { position: absolute; inset: -50%; background: radial-gradient(circle, rgba(255,215,0,.06), transparent 60%); animation: rotateGlow 60s linear infinite; }
     @keyframes rotateGlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  </style>
+    
+ .arrow-portal-btn {
+  position: absolute;
+  top: 30px;                /* Distance from the top edge of the screen */
+  bottom: auto;             /* Disables your old bottom property */
+  left: auto;               /* Disables your old left center property */
+  right: 40px;              /* Distance from the right edge of the screen */
+  transform: none;          /* Removes the old center-alignment shift */
   
+  background: transparent;
+  color: var(--accent);     
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  width: 70px;             
+  height: 70px;
+  cursor: pointer;
+  z-index: 15;             
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* The arrow glyph rendering engine settings */
+.arrow-portal-btn .arrow-icon {
+  font-size: 2.2rem;
+  font-family: sans-serif; /* Clean baseline line weight typography */
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+/* Dynamic magnetic pull hover state effect */
+.arrow-portal-btn:hover {
+  background: var(--accent);
+  color: #121212;          /* Flips to background contrast variant */
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+/* Micro-interaction: pushes arrow rightward slightly on pointer focus hover */
+.arrow-portal-btn:hover .arrow-icon {
+  transform: translateX(4px);
+}
+</style>
   <!-- INTERCEPT ELEMENT VISIBILITY BEFORE RENDER -->
   <script>
     if (localStorage.getItem("hasEnteredGallery") === "true") {
@@ -204,7 +255,7 @@
     <div class="dream-word word8"> light </div>
     <div class="dream-word word9"> still here </div>
     <div class="dream-word word10"> grace </div>
-    <div class="dream-glow"></div>s
+    <div class="dream-glow"></div>
 
 
     <div class="dream-glow"></div>
@@ -243,25 +294,17 @@
 
         <img src="image.png" class="dream-image">
 
-        <div id="portal-button">
-
-    <div class="medallion-inner">
-        ENTER
-    </div>
-
-</div>
-
-        <div class="portal-text">
-            
-        </div>
-
-    </div>
-
-</div>
+             
+     <!-- COMPACT ARROW PORTAL ENTER BUTTON --> 
+      <button id="portal-button" class="arrow-portal-btn" aria-label="Enter Gallery"> 
+        <span class="arrow-icon">→</span> 
+      </button> 
+    </div> 
+  </div>
 
 <!-- MAIN GALLERY -->
 <header>
-    <h1 class="neon-gold-streaks">
+    <h1 class="neon-gold-streaks" style="margin-top: 0px; margin-bottom: 20px;">
         Raining Down On Me
     </h1>
 </header>
@@ -270,10 +313,10 @@
 
     <button class="btn-clear back-btn"> ⬅ BACK </button> 
 
-    <a href="https://suno.com/playlist/4b7d9f88-ca5d-4588-8df1-a8eb36d80355"
+    <a href="https://suno.com/playlist/e36042dc-b362-4d50-8e20-43a0ca31f14b?sh=Y4e8kyExbyNOlSxB"
        target="_blank"
        class="playlist-btn">
-       SEE FULL PLAYLIST 🎵
+        PLAYLIST 🎵
     </a>
 
 </div>
@@ -556,26 +599,17 @@
 
     </div>
 
-   <div class="gallery-nav">
+   <div class="gallery-nav" style="margin-top: 20px; margin-bottom: 20px;">
 
-    <button class="btn-clear nav-btn"
-            onclick="goBack()">
-        ⬅ BACK
-    </button>
+    <button class="btn-clear back-btn"> ⬅ BACK </button> 
 
-    <a href="https://suno.com/playlist/4b7d9f88-ca5d-4588-8df1-a8eb36d80355"
+    <a href="https://suno.com/playlist/e36042dc-b362-4d50-8e20-43a0ca31f14b?sh=Y4e8kyExbyNOlSxB"
        target="_blank"
        class="playlist-btn">
-       SEE FULL PLAYLIST 🎵
+        PLAYLIST 🎵
     </a>
 
   </div> <!-- Closes #main-content or your grid-container -->
-
-  <!-- REPAIRED GALLERY NAVIGATION -->
-  <div class="gallery-nav"> 
-    <button class="btn-clear back-btn"> ⬅ BACK </button> 
-    <a href="https://suno.com/playlist/4b7d9f88-ca5d-4588-8df1-a8eb36d80355" target="_blank" class="playlist-btn"> SEE FULL PLAYLIST 🎵 </a> 
-  </div>
 
   <!-- LIGHTBOX MODAL --> 
   <div id="lightbox" onclick="this.style.display='none'"> 
