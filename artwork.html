@@ -133,7 +133,7 @@
     font-size: 24px;
     pointer-events: none;
     user-select: none;
-    animation: popAndFloat .8s ease-out forwards;
+    animation: popAndFloat 2.8s ease-out forwards;
     opacity: 0;
 }
 
@@ -524,7 +524,7 @@ function createHeartExplosion() {
         ".like-section"
     );
 
-    const heartCount = 6;
+    const heartCount = 40;
 
     for(let i=0;i<heartCount;i++) {
 
@@ -544,7 +544,7 @@ function createHeartExplosion() {
         + (Math.random() * .4 - .2);
 
         const burstDistance =
-        30 + Math.random() * 20;
+        260 + Math.random() * 40;
 
         const xBurst =
         Math.cos(angle)
@@ -553,15 +553,15 @@ function createHeartExplosion() {
         const yBurst =
         Math.sin(angle)
         * burstDistance
-        - 10;
+        + 10;
 
         const xFloat =
         xBurst
-        + (Math.random()*60-30);
+        + (Math.random()*100-50);
 
         const yFloat =
         yBurst
-        - (80+Math.random()*60);
+        + (Math.random() * 300 - 150);
 
         heart.style.setProperty(
             "--x-burst",
@@ -594,7 +594,7 @@ function createHeartExplosion() {
 
         setTimeout(
             () => heart.remove(),
-            800
+            6800
         );
 
     }
