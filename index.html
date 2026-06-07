@@ -8,7 +8,9 @@
   <link rel="icon" type="image/png" href="image1.png">
   <link href="https://fonts.googleapis.com" rel="stylesheet">
   <style>
-    :root {
+*{
+    box-sizing:border-box;
+}    :root {
       --bg: #121212;
       --card: #1e1e1e;
       --text: #ffffff;
@@ -23,7 +25,8 @@
       margin: 0;
       padding: 0;
       min-height: 100vh;
-      overflow-x: hidden;
+      overflow-x:hidden;
+width:100%;
     }
     .neon-gold-streaks {
       background: linear-gradient(
@@ -70,6 +73,31 @@
       margin: 0;
       text-shadow: 0 0 5px rgba(255, 215, 0, 0.5), 0 0 15px rgba(183, 110, 121, 0.6), 0 0 30px rgba(255, 102, 204, 0.4);
     }
+.gallery-nav{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+    width:100%;
+    margin:20px auto;
+}
+
+.grid-container{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(280px,340px));
+
+    justify-content:center;
+
+    width:100%;
+    max-width:1200px;
+
+    margin:0 auto;
+    padding:0 15px;
+
+    box-sizing:border-box;
+}
     .audio-wrapper {
             width: 100%;
             max-width: 600px;
@@ -83,14 +111,25 @@
         
 
     .audio-wrapper iframe { display: block; border: none; width: 100%; }
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-      width: 100%;
-      max-width: 1200px;
-      margin-top: 20px;
-    }
+    .grid-container{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(280px,340px));
+
+    justify-content:center;
+
+    gap:30px;
+
+    width:100%;
+
+    max-width:1200px;
+
+    margin:20px auto;
+
+    padding:0 15px;
+
+    box-sizing:border-box;
+}
     .photo-tile {
       background: var(--card);
       border-radius: 25px;
@@ -149,13 +188,20 @@
     /* ======================================= DREAMSCAPE LANDING PAGE ======================================= */
     #dreamscape {
       position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+  min-height: 100vh;
+  overflow-y: auto;
       inset: 0;
       z-index: 50000;
       background: radial-gradient(circle at center, rgba(255,215,0,.08), transparent 60%), #121212;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
+      overflow-y: auto;
+overflow-x: hidden;
       opacity: 1;
       visibility: visible;
       transition: opacity 2s ease, visibility 2s ease;
@@ -168,11 +214,14 @@
       visibility: hidden !important;
     }
     
-    .dream-content { text-align: center; max-width: 900px; padding: 40px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box; }
+    .dream-content { text-align: center; width:100%;
+    max-width:1200px;
+    padding:30px 15px;
+    margin:auto; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box; }
     .dream-title { font-family: 'Fredoka One', cursive; font-size: clamp(3rem, 8vw, 5rem); margin-bottom: 30px; text-shadow: 0 0 10px rgba(255,215,0,.5), 0 0 30px rgba(255,102,204,.3), 0 0 60px rgba(255,215,0,.25); }
     .dream-image {
-  width: 95vw;
-  max-width: 1200px;
+  width:min(95vw,1200px);
+    max-width:100%;
   height: auto;
 
   border-radius: 25px;
@@ -189,15 +238,7 @@
   text-shadow: 0 0 10px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.9); /* High contrast shadow fallback */}
     .word1 { top: 8%; left: 10%; } .word2 { top: 20%; right: 8%; } .word3 { top: 42%; left: 6%; } .word4 { top: 65%; left: 15%; } .word5 { top: 12%; left: 50%; } .word6 { top: 78%; right: 10%; } .word7 { top: 55%; right: 15%; } .word8 { top: 32%; left: 70%; } .word9 { bottom: 12%; left: 45%; } .word10 { top: 5%; right: 35%; }
     @keyframes drift { 0% { transform: translateY(0px); opacity: .45; } 50% { transform: translateY(-15px); opacity: .45; } 100% { transform: translateY(0px); opacity: .45; } }
-    <div class="dream-content">
-      <div class="dream-title neon-gold-streaks"> Raining Down On Me </div>
-      <img src="image1.png" class="dream-image">
-      
-      <!-- REPLACE PORTAL BUTTON WRAPPER WITH THIS COMPACT ARROW BUTTON -->
-      <button id="portal-button" class="arrow-portal-btn" aria-label="Enter Gallery">
-        <span class="arrow-icon">→</span>
-      </button>
-    </div>
+     
     .dream-glow { position: absolute; inset: -50%; background: radial-gradient(circle, rgba(255,215,0,.06), transparent 60%); animation: rotateGlow 60s linear infinite; }
     @keyframes rotateGlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     
@@ -243,6 +284,127 @@
 .arrow-portal-btn:hover .arrow-icon {
   transform: translateX(4px);
 }
+
+.album-description{
+    max-width:900px;
+    margin:40px auto;
+    padding:0 20px;
+    font-size:1.3rem;
+    line-height:1.8;
+    text-align:center;
+}
+
+.theme-cloud{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:16px;
+    max-width:1100px;
+    margin:50px auto;
+    padding:20px;
+}
+
+.theme-cloud span{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,215,0,.3);
+    border-radius:999px;
+    padding:12px 20px;
+    font-size:1rem;
+}
+
+.trailer-transcript{
+    max-width:900px;
+    margin:60px auto;
+    padding:0 25px 100px;
+    line-height:1.8;
+    text-align:left;
+}
+
+.trailer-player{
+    margin-top:40px;
+}
+
+.dream-themes{
+    position:relative;
+    width:100%;
+    max-width:1100px;
+    margin:60px auto;
+    padding:40px 20px;
+    min-height:500px;
+}
+
+.floating-word{
+    position:absolute;
+    color:white;
+    opacity:.65;
+    font-size:clamp(1rem,2vw,1.8rem);
+    text-shadow:0 0 10px rgba(255,215,0,.25);
+    animation:drift 18s ease-in-out infinite;
+}
+
+.floating-word:nth-child(1){
+    top:20px;
+    left:5%;
+}
+
+.floating-word:nth-child(2){
+    top:80px;
+    right:10%;
+}
+
+.floating-word:nth-child(3){
+    top:170px;
+    left:15%;
+}
+
+.floating-word:nth-child(4){
+    top:250px;
+    right:20%;
+}
+
+.floating-word:nth-child(5){
+    top:330px;
+    left:8%;
+}
+
+.floating-word:nth-child(6){
+    top:120px;
+    left:40%;
+}
+
+.floating-word:nth-child(7){
+    top:390px;
+    right:8%;
+}
+
+.floating-word:nth-child(8){
+    top:450px;
+    left:30%;
+}
+
+.floating-word:nth-child(9){
+    top:210px;
+    left:55%;
+}
+
+.floating-word:nth-child(10){
+    top:520px;
+    right:20%;
+}
+
+.dream-lyric-section{
+    display:block;
+    width:100%;
+    margin:50px auto;
+    overflow:visible;
+}
+
+.dream-lyric-section text{
+    fill:rgba(255,255,255,.45);
+    font-size:22px;
+    font-family:'Varela Round',sans-serif;
+}
+
 </style>
   <!-- INTERCEPT ELEMENT VISIBILITY BEFORE RENDER -->
   <script>
@@ -259,60 +421,130 @@
 
   <!-- DREAMSCAPE LANDING PAGE -->
   <div id="dreamscape">
-    <div class="dream-word word1"> healing </div>
-    <div class="dream-word word2"> stay </div>
-    <div class="dream-word word3"> breathe </div>
-    <div class="dream-word word4"> beloved </div>
-    <div class="dream-word word5"> don't let go </div>
-    <div class="dream-word word6"> I remember </div>
-    <div class="dream-word word7"> you survived </div>
-    <div class="dream-word word8"> light </div>
-    <div class="dream-word word9"> still here </div>
-    <div class="dream-word word10"> grace </div>
-    <div class="dream-glow"></div>
-
 
     <div class="dream-glow"></div>
 
-    <div class="dream-content">
+ <div class="dream-content">
 
-        <div class="dream-title neon-gold-streaks">
-          
-        </div>
+    <!-- ENTER GALLERY BUTTON -->
+    <button id="portal-button"
+            class="arrow-portal-btn"
+            aria-label="Enter Gallery">
+        <span class="arrow-icon">→</span>
+    </button>
 
-      <div class="dream-lyrics">
-  <!-- Lyric 1 -->
-  <svg class="dream-lyric lyric1" viewBox="0 0 400 100">
-    <path id="curve1" d="M 10,60 Q 100,20 200,50 T 390,40" fill="none" />
-    <text><textPath href="#curve1">Some wounds become songs...</textPath></text>
-  </svg>
+    <!-- HERO IMAGE -->
+    <img src="image.png" class="dream-image">
 
-  <!-- Lyric 2 -->
-  <svg class="dream-lyric lyric2" viewBox="0 0 400 100">
-    <path id="curve2" d="M 10,40 Q 120,80 230,30 T 390,60" fill="none" />
-    <text><textPath href="#curve2">Some tears become rivers...</textPath></text>
-  </svg>
+    <!-- TRAILER -->
+    <div class="audio-wrapper trailer-player">
 
-  <!-- Lyric 3 -->
-  <svg class="dream-lyric lyric3" viewBox="0 0 400 100">
-    <path id="curve3" d="M 10,50 Q 90,20 200,60 T 390,30" fill="none" />
-    <text><textPath href="#curve3">Some losses become light...</textPath></text>
-  </svg>
+        <iframe
+            src=https://suno.com/embed/92895633-106a-4645-a706-4feda8b90ec3
+            width="760"
+            height="240"
+            frameborder="0"
+            allowfullscreen>
+        </iframe>
 
-  <!-- Lyric 4 -->
-  <svg class="dream-lyric lyric4" viewBox="0 0 500 100">
-    <path id="curve4" d="M 10,40 Q 150,80 300,30 T 490,50" fill="none" />
-    <text><textPath href="#curve4">And sometimes healing arrives quietly...</textPath></text>
-  </svg>
+    </div>
+
+    <!-- TAGLINE -->
+    <div class="album-description">
+
+        An album for anyone fighting to become whole again,
+        proving that the rain isn't what washes us away—
+        it’s what brings us back to life.
+
+    </div>
+
+   <!-- FLOATING WORDS + CURVED PHRASES SECTION -->
+
+<div class="dream-themes">
+
+    <div class="floating-word">Healing</div>
+    <div class="floating-word">Beloved</div>
+    <div class="floating-word">Stay</div>
+    <div class="floating-word">Breathe</div>
+
+    <div class="floating-word">You Survived</div>
+    <div class="floating-word">Inner Peace</div>
+    <div class="floating-word">Broken Promises</div>
+    <div class="floating-word">Cloud Nine</div>
+
+    <div class="floating-word">Please Don't Forget Me</div>
+    <div class="floating-word">Can You Have My All?</div>
+
+    <svg class="dream-lyric-section" viewBox="0 0 500 100">
+        <path id="themeCurve1"
+              d="M 10,60 Q 140,10 250,50 T 490,40"
+              fill="none"/>
+        <text>
+            <textPath href="#themeCurve1">
+                Some wounds become songs...
+            </textPath>
+        </text>
+    </svg>
+
+    <svg class="dream-lyric-section" viewBox="0 0 500 100">
+        <path id="themeCurve2"
+              d="M 10,40 Q 180,90 320,20 T 490,50"
+              fill="none"/>
+        <text>
+            <textPath href="#themeCurve2">
+                Some tears become rivers...
+            </textPath>
+        </text>
+    </svg>
+
+    <svg class="dream-lyric-section" viewBox="0 0 500 100">
+        <path id="themeCurve3"
+              d="M 10,60 Q 120,10 260,55 T 490,35"
+              fill="none"/>
+        <text>
+            <textPath href="#themeCurve3">
+                Some losses become light...
+            </textPath>
+        </text>
+    </svg>
+
+    <svg class="dream-lyric-section" viewBox="0 0 500 100">
+        <path id="themeCurve4"
+              d="M 10,45 Q 170,90 300,15 T 490,45"
+              fill="none"/>
+        <text>
+            <textPath href="#themeCurve4">
+                And sometimes healing arrives quietly...
+            </textPath>
+        </text>
+    </svg>
+
 </div>
 
-        <img src="image.png" class="dream-image">
+    <!-- TRANSCRIPT -->
+    <div class="trailer-transcript">
 
-             
-     <!-- COMPACT ARROW PORTAL ENTER BUTTON --> 
-      <button id="portal-button" class="arrow-portal-btn" aria-label="Enter Gallery"> 
-        <span class="arrow-icon">→</span> 
-      </button> 
+        <h2>Album Trailer</h2>
+
+        <p>
+            Raining Down On Me is an album for anyone who has ever lost something they loved, searched for their way home, or fought to become whole again. It is for anyone who has discovered that even after heartbreak, there is still beauty waiting on the other side of the storm.
+Sometimes the rain isn't what washes us away. Sometimes it's what brings us back to life.
+The album weaves together intimate acoustic reflections, high-energy anthems, nostalgic love stories, and deeply personal narratives. It uncovers love, loss, and renewal.
+Some songs tell stories of romance—of unforgettable summers, moonlit promises, broken hearts, and memories that refuse to fade. Others travel deeper, into the landscapes of grief, resilience, identity, and transformation.
+Beneath every story lies the same question:
+What carries us through the storms of life?
+Again and again, the answer emerges through the music—in love, in hope, in memory, in faith, in courage, and in the quiet light that never fully goes out.
+The rain becomes a symbol of grace. The ocean becomes a symbol of struggle and survival. The light becomes a symbol of hope. The brokenness becomes a place of transformation and new life.
+Raining Down On Me is an album for anyone who has ever lost something they loved, searched for their way home, fought to become whole again, or discovered that even after heartbreak, there is still beauty waiting on the other side of the storm.
+Because sometimes the rain isn't what washes us away.
+Sometimes it's what brings us back to life.
+
+        </p>
+
+    </div>
+
+</div>
+
     </div> 
   </div>
 
