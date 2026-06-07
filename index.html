@@ -170,7 +170,21 @@
     
     .dream-content { text-align: center; max-width: 900px; padding: 40px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box; }
     .dream-title { font-family: 'Fredoka One', cursive; font-size: clamp(3rem, 8vw, 5rem); margin-bottom: 30px; text-shadow: 0 0 10px rgba(255,215,0,.5), 0 0 30px rgba(255,102,204,.3), 0 0 60px rgba(255,215,0,.25); }
-    .dream-image { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 95vw; height: 95vh; object-fit: contain; border: none; border-radius: 0; z-index: 1; opacity: 0.6; pointer-events: none; }
+    .dream-image {
+  width: 95vw;
+  max-width: 1200px;
+  height: auto;
+
+  border-radius: 25px;
+  border: 5px solid white;
+
+  box-shadow: 8px 8px 0px rgba(0,0,0,0.3);
+
+  opacity: 1;
+
+  position: relative;
+  z-index: 2;
+}
     .dream-word { position: absolute; color: white; opacity: .99; font-size: clamp(1.2rem, 2.5vw, 2.2rem); letter-spacing: 2px; animation: drift 18s ease-in-out infinite; z-index: 9; /* Forces the words to sit safely on top of the background image */
   text-shadow: 0 0 10px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.9); /* High contrast shadow fallback */}
     .word1 { top: 8%; left: 10%; } .word2 { top: 20%; right: 8%; } .word3 { top: 42%; left: 6%; } .word4 { top: 65%; left: 15%; } .word5 { top: 12%; left: 50%; } .word6 { top: 78%; right: 10%; } .word7 { top: 55%; right: 15%; } .word8 { top: 32%; left: 70%; } .word9 { bottom: 12%; left: 45%; } .word10 { top: 5%; right: 35%; }
